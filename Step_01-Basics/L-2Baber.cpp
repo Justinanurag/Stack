@@ -20,6 +20,7 @@ int main(){
     cout<<"Reverse of string is "<<ans<<endl;
     return 0;
 }*/
+/*
 // Delete middle element of a stack
 #include<iostream>
 #include<stack>
@@ -62,5 +63,52 @@ int main() {
     }
     cout << endl;
     
+    return 0;
+}
+*/
+//Valid Parentesis
+#include<iostream>
+#include<stack>
+#include<string>
+using namespace std;
+
+bool isValidParenthesis(string s)
+{
+    stack<char> st;
+
+    for (int i = 0; i < s.length(); i++) {
+        char ch = s[i];
+
+        // If opening bracket, push to stack
+        if (ch == '(' || ch == '{' || ch == '[') {
+            st.push(ch);
+        } 
+        // If closing bracket, check for matching opening
+        else {
+            if (!st.empty()) {
+                char top = st.top();
+                if ((ch == ')' && top == '(') ||
+                    (ch == '}' && top == '{') ||
+                    (ch == ']' && top == '[')) {
+                    st.pop();
+                } else {
+                    return false;
+                }
+            } else {
+                return false; // closing bracket but stack is empty
+            }
+        }
+    }
+
+    return st.empty(); // stack should be empty if balanced
+}
+int main() {
+    string str = "{[()]}";
+    if (isValidParenthesis(str)) {
+        cout << "Balanced" << endl;
+    } else {
+        cout << "Not Balanced" << endl;
+    }
+
     return 0;
 }

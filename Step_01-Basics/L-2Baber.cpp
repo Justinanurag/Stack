@@ -115,7 +115,7 @@ int main() {
 }
 */
 // Insert element at bottom of stack
-
+/*
 #include<iostream>
 #include<stack>
 using namespace std;
@@ -154,6 +154,71 @@ int main() {
         cout << s.top() << endl;
         s.pop();
     }
+
+    return 0;
+}*/
+
+// Reverse the stack recurssion
+#include <iostream>
+#include <stack>
+using namespace std;
+
+// Function to insert an element at the bottom of a stack
+void insertAtBottom(stack<int> &s, int x) {
+    // Base case
+    if (s.empty()) {
+        s.push(x);
+        return;
+    }
+
+    // Remove the top element
+    int num = s.top();
+    s.pop();
+
+    // Recursive call to insert x at the bottom
+    insertAtBottom(s, x);
+
+    // Push the previous top element back
+    s.push(num);
+}
+
+// Function to reverse a stack using recursion
+void reverseStack(stack<int> &s) {
+    // Base case
+    if (s.empty()) {
+        return;
+    }
+
+    // Remove the top element
+    int num = s.top();
+    s.pop();
+
+    // Recursive call to reverse the rest of the stack
+    reverseStack(s);
+
+    // Insert the removed element at the bottom
+    insertAtBottom(s, num);
+}
+
+int main() {
+    stack<int> s;
+
+    // Pushing elements into the stack
+    s.push(1);
+    s.push(2);
+    s.push(3);
+    s.push(4);
+    s.push(5);
+
+// Reverse the stack
+reverseStack(s);
+
+// Print the reversed stack
+cout << "Reverse is : " << endl;
+while (!s.empty()) {
+    cout << s.top() << endl;
+    s.pop();
+}
 
     return 0;
 }

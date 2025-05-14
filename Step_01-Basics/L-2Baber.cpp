@@ -181,7 +181,7 @@ void insertAtBottom(stack<int> &s, int x) {
     // Push the previous top element back
     s.push(num);
 }
-
+/*
 // Function to reverse a stack using recursion
 void reverseStack(stack<int> &s) {
     // Base case
@@ -220,5 +220,49 @@ while (!s.empty()) {
     s.pop();
 }
 
+    return 0;
+}
+*/
+
+
+// Sort a stack using recursion
+#include<iostream>
+#include<stack>
+using namespace std; 
+void sortedInsert(stack<int> &stack,int num){
+    if(stack.empty()|| stack.top()<=num){
+        stack.push(num);
+        return;
+    }
+    int n=stack.top();
+    stack.pop();
+    //Recursive call
+    sortedInsert(stack,num);
+    stack.push(n);
+}
+void sortStack(stack<int> &stack){
+    if(stack.empty()){
+        return;
+    }
+    int num=stack.top();
+    stack.pop();
+    //Recuersive call
+    sortStack(stack);
+    //wapas ate time sorted stack ko insert karna hai
+    sortedInsert(stack,num);
+}
+int main(){
+    stack<int> stack;
+    stack.push(3);
+    stack.push(5);
+    stack.push(1);
+    stack.push(4);
+    stack.push(2);
+    sortStack(stack);
+    cout<<"Sorted stack is : "<<endl;
+    while(!stack.empty()){
+        cout<<stack.top()<<endl;
+        stack.pop();
+    }
     return 0;
 }
